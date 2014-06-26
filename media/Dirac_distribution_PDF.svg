@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg1623" viewBox="0 0 1300 975">
+  <desc>Originally Produced by GNUPLOT 4.0 patchlevel 0</desc>
+  <defs id="defs1627">
+    <path id="atip" stroke-linejoin="round" fill="currentColor" d="m0-1l12 30a21 21 0 0 0 -24 0l12-30z"/>
+  </defs>
+  <g stroke="#000" stroke-width="3" fill="none">
+    <path d="m125 867h27m1071 0h-27"/>
+    <path d="m125 838h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-30h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 721h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 604h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 488h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-30h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 371h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-30h27m1071 0h-27"/>
+    <path d="m125 254h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 138h13m1085 0h-13m-1085-30h13m1085 0h-13m-1085-29h13m1085 0h-13m-1085-29h27m1071 0h-27"/>
+    <path d="m125 867v-27m0-790v27"/>
+    <path d="m152 867v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-27m0-790v27"/>
+    <path d="m427 867v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-27m0-790v27"/>
+    <path d="m701 867v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-27m0-790v27"/>
+    <path d="m976 867v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-13m0-804v13m28 804v-13m0-804v13m27 804v-27m0-790v27"/>
+    <g font-size="36" font-family="Times" fill="#000">
+      <g transform="translate(100)" text-anchor="end">
+        <text y="880">-0.2</text>
+        <text y="763">0.0</text>
+        <text y="647">0.2</text>
+        <text y="530">0.4</text>
+        <text y="413">0.6</text>
+        <text y="296">0.8</text>
+        <text y="180">1.0</text>
+        <text y="63">1.2</text>
+      </g>
+      <g transform="translate(0,934)" text-anchor="middle">
+        <text x="125">1575.40MHz</text>
+        <text x="400">1575.41MHz</text>
+        <text x="674">1575.42MHz</text>
+        <text x="949">1575.43MHz</text>
+        <text x="1223">1575.44MHz</text>
+      </g>
+    </g>
+    <g color="#0000ff" stroke="currentColor">
+      <path d="m125 750h1098m-549 0v-583"/>
+      <use y="167" x="674" xlink:href="#atip"/>
+      <circle stroke-width="1" cy="750" cx="674" r="13.5" fill="#fff"/>
+    </g>
+    <path stroke="#000" d="m125 867h1098v-817h-1098v817"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Dirac Delta Function</dc:title>
+        <dc:date>2013-07-17T04:43:56</dc:date>
+        <dc:description>Dirac Delta Function</dc:description>
+        <dc:source>http://openclipart.org/detail/180925/dirac-delta-function-by-zinka-180925</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>zinka</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Dirac Delta Function</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

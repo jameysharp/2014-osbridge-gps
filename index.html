@@ -27,7 +27,7 @@
   <link rel="stylesheet" media="screen" href="jquery-jvectormap-1.2.2.css" />
 
   <style>
-  #sat-map {
+  .map.slide {
       position: absolute;
       top: 0;
       left: 0;
@@ -45,15 +45,161 @@
     <!-- Begin slides. Just make elements with a class of slide. -->
 
     <section class="slide">
-      <h1>Slide</h1>
+      <h1>The 20,000km view: How GPS works</h1>
+      <h2>Jamey Sharp</h2>
     </section>
 
     <section class="slide">
-      <div id="sat-map"></div>
+      <h2>wow. many word. so dense</h2>
+      <ul>
+      <li>this is an introduction; there's no quiz</li>
+      <li>please hold questions to the end</li>
+      </ul>
     </section>
 
     <section class="slide">
-      <h1>Here</h1>
+      <h2>Portland State Aerospace Society</h2>
+      <p>Launching amateur rockets... For Science!</p>
+      <img src="media/PSAS_group.jpg" />
+    </section>
+
+    <section class="slide">
+      <h2>Commercial GPS receivers:<br /> not built for rockets!</h2>
+      <img style="max-height: 100%; max-width: 40%; float: left" src="media/NDrive_GPS.jpg" />
+      <img style="max-height: 100%; max-width: 40%; float: right" src="media/lv2_ready_to_go.jpg" />
+    </section>
+
+    <section class="slide">
+      <h1>I'm a rocket scientist and you can too</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Outline</h2>
+      <ul>
+      <li>Time-of-flight positioning</li>
+      <li>Signal vs Noise</li>
+      <li>History and Politics</li>
+      <li>GPS Modernization</li>
+      <li>Data Layer</li>
+      <li>Open Hardware and Software</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+    <h1>Time-of-flight positioning</h1>
+    <p><em>take a deep breath</em></p>
+    </section>
+
+    <section class="slide">
+    <h2>GPS: What is it?</h2>
+    <img src="media/AFG-101123-014.jpg" />
+    </section>
+
+    <section class="slide">
+    <h2>GPS: What isn't it?</h2>
+    <ul>
+    <li>Purely passive, can't track you</li>
+    <li>... of course, your phone might send your GPS track somewhere</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>GPS: What isn't it?</h2>
+    <ul>
+    <li>No maps</li>
+    <li>... just position: latitude/longitude/altitude/time</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>How does "trilateration" work?</h2>
+    <img src="media/GPS_3D-trilateration.svg" />
+    </section>
+
+    <section class="slide">
+    <h2>Oops: Time-of-flight, not distance</h2>
+    <ul>
+    <li>each satellite transmits "the time now is <span id="current-time">...</span>"</li>
+    <li>receiver gets time-delayed messages:
+      <ul>
+      <li>20,000km away: now - 67ms</li>
+      <li>25,000km away: now - 83ms</li>
+      <li>30,000km away: now - 100ms</li>
+      <li>35,000km away: now - 117ms</li>
+      </ul>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <img src="media/Velocity0_70c.jpg" />
+    </section>
+
+    <section class="slide map" id="sat-map">
+    </section>
+
+    <section class="slide map" id="monitor-map">
+    </section>
+
+    <section class="slide">
+    <h2>Theory of relativity</h2>
+    <ul>
+    <li>Special relativity: at 14,000km/hour, clocks run slower by 7.2 microseconds/day</li>
+    <li>General relativity: at 20,000km altitude, clocks run faster by 45.9 microseconds/day</li>
+    </ul>
+    <p>Want a clock that seems to run at 10.23MHz?</p>
+    <p>Run it at 10.2299999954326MHz <small>&mdash;IS-GPS-200G</small></p>
+    </section>
+
+    <section class="slide">
+    <h1>Signal vs Noise</h1>
+    <p><em>take a deep breath</em></p>
+    </section>
+
+    <section class="slide">
+    <h1>Nearest GPS satellite:<br /> 20,000km straight up</h1>
+    </section>
+
+    <section class="slide">
+    <h2>How far is 20,000km?</h2>
+    <img src="media/Earth_Eastern_Hemisphere.jpg" />
+    </section>
+
+    <section class="slide">
+    <h2>How far is 20,000km?</h2>
+    <img src="media/Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg" />
+    </section>
+
+    <section class="slide">
+    <h2>How much power does a GPS satellite transmit?</h2>
+    <img src="media/lightblub_1295074c.jpg" />
+    </section>
+
+    <section class="slide" style="text-align: center; font-size: 200%; font-weight: bold">
+    <h2>500W</h2>
+    <p>20,000km later...</p>
+    <p class="slide">.0000000000000005W</p>
+    </section>
+
+    <section class="slide">
+    <h2>and they're all transmitting at once</h2>
+    <img src="media/Vuvuzelas_1.jpg" />
+    </section>
+
+    <section class="slide">
+    <h1>how could this ever work?</h1>
+    </section>
+
+    <section class="slide">
+    <h1>Direct Sequence Spread Spectrum!</h1>
+    </section>
+
+    <section class="slide" style="background-color: black">
+    <img src="media/sine-wave.jpg" />
+    </section>
+
+    <section class="slide">
+    <h2>Direct Sequence Spread Spectrum</h2>
+    <img src="media/Dirac_distribution_PDF.svg" />
     </section>
 
     <!-- End slides. -->
@@ -182,8 +328,6 @@ GPS BIIF-6  (PRN 06)
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
   $(function() {
-    $.deck('.slide');
-
     function get_satrecs(tle_string) {
         var satrecs = [],
             lines = tle_string.trim().split("\n");
@@ -215,17 +359,18 @@ GPS BIIF-6  (PRN 06)
     });
 
     var map = $("#sat-map").vectorMap('get', 'mapObject'),
-        satrecs = get_satrecs($("#gps-tle").text());
+        satrecs = get_satrecs($("#gps-tle").text()),
+        satdelay = 100,
+        satnow;
 
     function update() {
-        var now = new Date(),
-            gmst = satellite.gstime_from_date(
-                now.getUTCFullYear(),
-                now.getUTCMonth() + 1,
-                now.getUTCDate(),
-                now.getUTCHours(),
-                now.getUTCMinutes(),
-                now.getUTCSeconds()
+        var gmst = satellite.gstime_from_date(
+                satnow.getUTCFullYear(),
+                satnow.getUTCMonth() + 1,
+                satnow.getUTCDate(),
+                satnow.getUTCHours(),
+                satnow.getUTCMinutes(),
+                satnow.getUTCSeconds()
             );
 
         map.removeAllMarkers();
@@ -233,12 +378,12 @@ GPS BIIF-6  (PRN 06)
             if(satrecs.hasOwnProperty(label)) {
                 var posvel = satellite.propagate(
                         satrecs[label],
-                        now.getUTCFullYear(),
-                        now.getUTCMonth() + 1,
-                        now.getUTCDate(),
-                        now.getUTCHours(),
-                        now.getUTCMinutes(),
-                        now.getUTCSeconds()
+                        satnow.getUTCFullYear(),
+                        satnow.getUTCMonth() + 1,
+                        satnow.getUTCDate(),
+                        satnow.getUTCHours(),
+                        satnow.getUTCMinutes(),
+                        satnow.getUTCSeconds()
                     ),
                     position = satellite.eci_to_geodetic(posvel.position, gmst),
                     speed = mag(posvel.velocity);
@@ -248,10 +393,58 @@ GPS BIIF-6  (PRN 06)
                     name: label + ": altitude " + Math.round(position.height) + "km, speed " + Math.round(speed * 3600) + "kph",
                 });
             }
+
+        satnow.setTime(satnow.getTime() + 12 * 3600 / 15 * satdelay);
     }
 
-    update();
-    setInterval(update, 5000);
+    $.deck('.slide');
+
+    var sat_interval = undefined;
+    $(document).bind('deck.change', function(event, from, to) {
+      if($.deck('getSlide', to).attr('id') == "sat-map") {
+        satnow = new Date();
+        update();
+        sat_interval = setInterval(update, satdelay);
+      } else {
+        clearInterval(sat_interval);
+      }
+    });
+
+    setInterval(function() {
+      $("#current-time").text(new Date().toUTCString());
+    }, 1000);
+
+    $("#monitor-map").vectorMap({
+        map: 'world_mill_en',
+        markerStyle: {
+            initial: {
+                fill: '#76EE00',
+                stroke: '#383f47'
+            }
+        },
+        onRegionLabelShow: ignore,
+        onRegionOver: ignore,
+        markers: [
+          {latLng: [21.3114, -157.7964], name: "Hawaii"},
+          {latLng: [38.8024275, -104.5161575], name: "Schriever Air Force Base, Colorado Springs"},
+          {latLng: [-7.9333, -14.3667], name: "Ascension Island"},
+          {latLng: [-7.3133, 72.4111], name: "Diego Garcia"},
+          {latLng: [8.7167, 167.7333], name: "Kwajalein"},
+          {latLng: [28.4889, -80.5778], name: "Cape Canaveral"},
+          {latLng: [-34.9290, 138.6010], name: "Adelaide"},
+          {latLng: [-34.6033, -58.3817], name: "Buenos Aires"},
+          {latLng: [51.4525, -1.2762], name: "Hermitage"},
+          {latLng: [26.2167, 50.5833], name: "Manama"},
+          {latLng: [-0.2500, -78.5833], name: "Quito"},
+          {latLng: [38.8951, -77.0367], name: "Washington, D.C."},
+          {latLng: [64.8436, -147.7231], name: "Fairbanks"},
+          {latLng: [37.1498, 127.0771], name: "Osan"},
+          {latLng: [-17.5350, -149.5696], name: "Pape'ete"},
+          {latLng: [-25.7461, 28.1881], name: "Pretoria"},
+          {latLng: [-41.2889, 174.7772], name: "Wellington"},
+        ],
+    });
+
   });
 </script>
 </body>
