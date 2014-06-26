@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>GPS from 20,000km</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
 
-<link rel="stylesheet" href="jquery-jvectormap-1.2.2.css" />
-<script src="satellite.js"></script>
-<script src="jquery-1.11.1.min.js"></script>
-<script src="jquery-jvectormap-1.2.2.min.js"></script>
-<script src="jquery-jvectormap-world-mill-en.js"></script>
+  <title>The 20,000km view: How GPS works</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <link rel="stylesheet" media="screen" href="jquery-jvectormap-1.2.2.css" />
+
+  <style>
+  #sat-map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+  }
+  </style>
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h1>Slide</h1>
+    </section>
+
+    <section class="slide">
+      <div id="sat-map"></div>
+    </section>
+
+    <section class="slide">
+      <h1>Here</h1>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- End extension snippets. -->
+  </div>
 
 <!-- GPS TLEs from http://www.celestrak.com/NORAD/elements/ -->
 <script type="x-text/x-tle" id="gps-tle">
@@ -106,23 +166,24 @@ GPS BIIF-6  (PRN 06)
 2 39741  55.0467 144.8044 0003124 180.7521 179.2623  1.97379015   206
 </script>
 
-<style>
-#sat-map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-</style>
+<!-- Required JS files. -->
+<script src="jquery-1.11.1.min.js"></script>
+<script src="core/deck.core.js"></script>
 
-</head>
-<body>
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
 
-<div id="sat-map"></div>
+<script src="satellite.js"></script>
+<script src="jquery-jvectormap-1.2.2.min.js"></script>
+<script src="jquery-jvectormap-world-mill-en.js"></script>
 
+<!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
-$(function() {
+  $(function() {
+    $.deck('.slide');
+
     function get_satrecs(tle_string) {
         var satrecs = [],
             lines = tle_string.trim().split("\n");
@@ -191,8 +252,7 @@ $(function() {
 
     update();
     setInterval(update, 5000);
-});
+  });
 </script>
-
 </body>
 </html>
