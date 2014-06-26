@@ -1,0 +1,307 @@
+2.5m-- introduction
+
+- who am I
+- this is a dense talk; there's no quiz, and please hold questions to the end
+- PSAS launches amateur rockets. for science!
+- commercial GPS receivers just aren't built for use on rockets. so we're building our own.
+- so I'm here as a rocket scientist to tell you that you can do rocket science too
+- outline:
+ - time-of-flight positioning overview
+ - signal vs noise
+ - history and politics of GPS
+ - GPS modernization
+ - data layer
+ - open hardware and software
+- 
+- 
+- 
+- 
+
+5m-- Time-of-flight positioning: trilateration, Doppler, orbits, and relativity
+
+- GPS: what is it?
+  - logo from http://www.losangeles.af.mil/library/factsheets/factsheet.asp?fsID=5311
+  - satellite-based time-of-flight positioning system
+- GPS: what isn't it?
+  - purely passive, can't track you
+  - your phone might send your GPS track somewhere though
+- GPS: what isn't it?
+  - no maps, just latitude/longitude/altitude/time
+- three intersecting-spheres diagram with distances
+- but GPS is time-of-flight, not distance
+- four intersecting-spheres with timestamps and timestamp at intersection
+- independent velocity measurement from Doppler shift
+- satellite.js orbits slide
+  - number of satellites currently in orbit
+  - orbital altitude: 20,000 km
+- satellite.js orbits: next 12 hours in 15 seconds
+  - orbital velocity: 14,000 km/hour
+- how do we know these orbits? control segment: reuse same GPS signals from known ground locations
+- control segment
+ - map of monitoring stations
+- special relativity says at those speeds, GPS satellite clocks appear to run slower by 7.2 microseconds/day
+- general relativity says at those altitudes, GPS satellite clocks appear to run faster by 45.9 microseconds/day
+- want a GPS satellite clock that seems to run at 10.23MHz?
+ - run it at 10.2299999954326MHz (according to official specification, IS-GPS-200G)
+- 
+- 
+- 
+- 
+- 
+- 
+
+5m-- Signal vs noise: 500W at 20,000km, spread spectrum, urban challenges (multi-path)
+
+- if you're on the ground, the closest a GPS satellite will be is 20,000km straight up
+- 20 megameters: how far is that?
+ - half the circumference of the Earth
+ - or 2,260 Mount Everests
+- GPS satellites broadcast 500 watts of radio power; think of five 100W light bulbs
+- by the time the signal reaches the ground, it's 18 orders of magnitude weaker
+ - other radio signals around us swamp this
+- in addition, all the GPS satellites transmit on the same channel
+- so how could this ever work? Direct Sequence Spread Spectrum!
+- start with your actual signal
+ - let's just use a sine wave
+ - which is a spike of power at one frequency
+- pick a pseudo-random sequence of +1 and -1, with the right properties
+- what happens if you multiply your signal by this sequence?
+ - that spike of power spreads out
+- how do you get your signal back?
+ - just multiply it by the same pseudo-random sequence; the -1s cancel
+ - during de-spreading the signal power gets piled back into one power spike
+- so what happens if there's an interfering signal at the receiver?
+ - the interference gets spread out while the real signal is put back together
+- this makes accidental interference very unlikely, and intentional jamming harder
+- US military also uses "anti-spoofing" mode with an additional, secret, pseudo-random spreading code
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+5m-- History and politics of navigation systems and GPS
+
+- history of navigation
+ - modern navigation is the product of military history
+ - global time synchronization keeps coming up
+- Scilly naval disaster of 1707
+ - four British navy ships sank entering the English channel, killing 1,400 sailors
+ - cause reported as incorrect measurement of longitude
+ - led to Britain's Longitude Prize established in 1714
+- largest longitude prize payments won by John Harrison (1736-1773)
+- LORAN
+ - ground-based positioning
+ - LORAN-A development began October 1940 (1 year after WW2 began in Europe)
+ - LORAN-A operational June 1942 (6 months after Pearl Harbor)
+ - simple, portable electronics; complex to use
+- LORAN-C
+ - began as Cyclan (1946) then Cytac (1952)
+ - first field test (1950-51) locations: Palo Alto, Hillsboro, and Medford
+ - clock synchronization demonstrated in 1961
+ - transitioned to Coast Guard in 1957
+- what else happened in 1957?
+ - Sputnik 1 launched
+- Transit
+ - inspired by observations of Doppler shift on Sputnik 1's radio transmission
+ - operational: 1964
+ - five satellites in polar orbits
+ - use Doppler curve from any one satellite
+- Transit use cases
+ - used to reset INS on submarines used as ICBM mobile launch platforms
+ - later used for precise civilian surveying
+- Transit limitations
+ - at least one satellite in view every few hours
+ - two-minute observation
+ - single-pass accuracy: 200 meters
+ - compute time for fix: 15 minutes
+- Transit influence on GPS
+ - dual-frequency for ionospheric correction
+ - satellite orbit determined from ground by inverse operation
+ - global clock synchronization to 50 microseconds
+- GPS idea formed in 1973 in the Pentagon
+ - prototype "Block I" satellites launched 1978-1985
+- 1983 civilian Korean Air Lines flight shot down when it strayed into USSR airspace
+ - President Reagan announced GPS would be made available for civilian use
+- first 24 "Block II" satellites launched 1989-1994; fully operational 1995
+- Selective Availability
+ - intended to prevent non-US military use through degraded civilian accuracy
+ - this limited safety-critical uses
+- Selective Availability turned off in 2000
+ - improved civilian receiver accuracy from 100 meters to 20 meters
+ - replaced by unspecified area denial
+- GPS Modernization
+ - announced by White House in 1998
+ - authorized by Congress in 2000 as "GPS III"
+- GPS Modernization
+ - contract awarded to Lockheed Martin in 2008
+ - first Block III launch planned for 2014
+ - first Block III launch actually no earlier than 2016
+- given consequences of GPS failure, can we trust a US military operated system?
+- other GNSS systems:
+ - Russia: GLONASS
+ - Europe: Galileo
+ - China: Compass
+ - and regional systems launched by France, India, and Japan
+- conclusion
+ - http://www.usafpatches.com/gallery/displayimage.php?pid=42619
+ - military demands got us global positioning
+ - but civilian innovation made it useful
+ - go hack on stuff
+
+sources:
+
+ - http://en.wikipedia.org/wiki/Scilly_naval_disaster_of_1707
+ - http://en.wikipedia.org/wiki/John_Harrison
+ - https://archive.org/details/TheDevelopmentOfLoranCNavigationAndTiming
+ - http://en.wikipedia.org/wiki/LORAN
+ - http://en.wikipedia.org/wiki/Loran-C
+ - http://www.navcen.uscg.gov/?pageName=loranMain
+ - http://en.wikipedia.org/wiki/Transit_%28satellite%29
+
+5m-- GPS modernization: Ionospheric path-length error, the L1/L2/L5 bands, and codeless tracking
+
+- you may have heard that the US military has more accurate GPS than the rest of us--but why?
+- after you've accounted for all the correctable sources of error, the largest remaining error is ionospheric delay
+- the ionosphere is the upper part of Earth's atmosphere (85km-600km) that's unpredictably ionized by solar wind
+- bad news: a GPS receiver can't measure the signal delay due to the ionosphere directly
+- good news: ionosphere delay depends on frequency, so if you have signals on two frequencies, you can cancel this effect
+- side note: measuring the total electron content in the ionosphere is one piece of science you can do using GPS
+- civilian signal is transmitted on 1575.42MHz, called "L1"; military signal on 1227.60 MHz, called "L2"; high-end military receivers use both
+- better news: GPS modernization will add new "L2C" civilian signal on L2, and a civilian-usable L5 frequency
+- that's great! what if I need better precision now?
+- WAAS/SBAS: measure ionosphere delays from known locations, broadcast corrections from satellites
+- codeless tracking: hacks to use L2 even though we can't decrypt it
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+sources:
+
+- http://en.wikipedia.org/wiki/Error_analysis_for_the_Global_Positioning_System
+- http://www.researchgate.net/publication/236582995_Squaring_and_Cross-Correlation_Codeless_Tracking_Analysis_and_Generalization
+- http://plan.geomatics.ucalgary.ca/papers/msthesis_codeless_nicolalinty24sep10.pdf
+
+5m-- Data layer: almanac, ephemeris, time to first fix, and assisted GPS
+
+- trilateration reprise
+ - to find out where we are, we need to know where the GPS satellites are
+- satellites transmit navigation message
+ - only 50 bits-per-second
+ - complete message takes 30 seconds
+- frames
+ - complete message is 5 "sub-frames" long
+ - each sub-frame is 10 30-bit words
+- locking a satellite requires knowing which spread spectrum code to look for
+ - how can you guess which satellites to look for if you don't know where you or the satellites are?
+ - try until you get lucky for the first one, but then...
+- almanac (sub-frame 4/5)
+ - approximate orbital parameters for all satellites
+- almanac (sub-frame 4/5)
+ - ...but rotates through 1 or 2 every 30 seconds
+ - 12.5 minutes for full almanac (called "cold start")
+- blindly try them all!
+ - compute intensive, but we can do lots of FFTs these days
+ - find all visible satellites in less than 1/10th of a second
+- so you found the visible satellites; now what?
+ - still need to know each satellite's precise orbit
+- ephemeris (sub-frame 2/3)
+ - detailed orbit, but only for the satellite you're listening to
+ - sent every 30 seconds
+ - between 18 and 48 seconds to full ephemerides (called "warm start")
+- clock corrections (sub-frame 1)
+ - even atomic clocks drift. yes, GPS cares
+ - like ephemeris, different for each satellite and sent only by that satellite
+- hot start
+ - if you have current ephemerides, accurate UTC time, and position within 100km...
+ - lock and position fix should take less than a second!
+- but I'm impatient!
+ - "assisted GPS" gets current ephemerides from a high-speed network, like cell data or wi-fi
+ - your phone almost certainly does this
+ - your phone might not support GPS at all without network assistance
+- assisted GPS shortcuts
+ - assisted recievers often have pretty good current time from network
+ - phones usually have approximate current location from cell towers
+ - together, it's easy to guess which satellites to look for
+- but I'm picky!
+ - GPS control segment uploads best-guess ephemeris forecasts to satellites once per day
+ - once per week, they report what the last week's orbits really were
+- surveying
+ - surveyors don't need a quick answer, they need a very accurate one
+ - record raw data over 24 hours to average out errors
+ - a week later, use accurate ephemerides to analyze the recorded measurements
+- other navigation message stuff
+ - satellite health
+ - ionospheric data
+ - UTC corrections
+- GPS modernization changes all the encoding details, but the big picture is the same
+- 
+- 
+- 
+
+5m-- Open hardware and software for GPS: GPL-GPS, GPSTK, homebrew GPS, Jenner's board, ...
+
+- this is Open Source Bridge. where's the openness?
+- good news: unlike many things, GPS operation is well documented by US government
+- bad news: most GPS receiver hardware is the worst kind of proprietary
+ - documentation only under NDA and lots of money
+- seems like only one vendor at a time has public hardware documentation
+ - last decade: Zarlink
+ - this decade: Maxim
+- 1991-1992: Matjaž Vidmar builds homebrew GPS/GLONASS receivers
+ - http://lea.hamradio.si/~s53mv/navsats/theory.html
+ - ham radio enthusiast and EE prof in Slovenia
+ - head of Laboratory for Radiation and Optics at the University of Ljubljana
+- 1991-1992: Matjaž Vidmar builds homebrew GPS/GLONASS receivers
+ - Motorola 68k CPU + DSP CPU + discrete electronics
+- 2011-2013: Andrew Holme builds homebrew GPS receivers
+ - http://www.aholme.co.uk/GPS/Main.htm
+- 2011-2013: Andrew Holme builds homebrew GPS receivers
+ - discrete electronics, FPGA, and Raspberry Pi
+- other projects using commercial hardware
+ - Clifford Kelley's OpenSourceGPS (late '90s to 2012)
+ - Andrew Greenberg's GPL-GPS (2005 Master's thesis)
+- current: Portland State Aerospace Society builds GPS RF frontend
+ - minimum hardware to feed digitized L1 radio into a microcontroller or PC
+- GPS RF frontend possibilities: stream into a BeagleBoard, accelerate using DSP core
+- GPS RF frontend possibilities: stream into an FPGA
+- GPS RF frontend possibilities: stream into a PC over USB and do everything in software
+- GPS RF frontend possibilities: log raw data from flying on a rocket
+ - coming July 20th!
+- open source project: GPSTk, from University of Texas at Austin
+ - open sourced in 2003
+ - high-level positioning algorithms
+- GPSTk
+ - still need low-level tracking loops to use with an RF frontend
+- how hard is this?
+ - it kind of is rocket science
+ - but you can totally learn it
+- I've never taken a class in DSP or radio
+ - just read lots of Wikipedia articles
+- 
+- 
+
+2.5m-- Summary (GPS in 2.5 minutes)
+
+- find your position by trilateration from satellites
+ - missing features: maps and surveillance
+- amazing science results
+ - theory of relativity confirmed
+ - method to measure ionosphere's total electron content due to solar wind
+- amazing engineering results
+ - signal that's below the noise floor still detectable due to direct sequence spread spectrum
+- global positioning is still evolving, with GPS modernization plus other countries' systems
+- lots of opportunities for you to hack on GPS
+- come play at PSAS! questions?
+- 
+- 
+- 
+- 
