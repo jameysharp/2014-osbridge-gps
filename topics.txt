@@ -217,9 +217,6 @@ sources:
  - detailed orbit, but only for the satellite you're listening to
  - sent every 30 seconds
  - between 18 and 48 seconds to full ephemerides (called "warm start")
-- clock corrections (sub-frame 1)
- - even atomic clocks drift. yes, GPS cares
- - like ephemeris, different for each satellite and sent only by that satellite
 - hot start
  - if you have current ephemerides, accurate UTC time, and position within 100km...
  - lock and position fix should take less than a second!
@@ -239,6 +236,9 @@ sources:
  - record raw data over 24 hours to average out errors
  - a week later, use accurate ephemerides to analyze the recorded measurements
 - other navigation message stuff
+  - clock corrections (sub-frame 1)
+   - even atomic clocks drift. yes, GPS cares
+   - like ephemeris, different for each satellite and sent only by that satellite
  - satellite health
  - ionospheric data
  - UTC corrections

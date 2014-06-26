@@ -471,6 +471,147 @@
     <p><em>take a deep breath</em></p>
     </section>
 
+    <section class="slide">
+    <img src="media/GPS_3D-trilateration.svg" />
+    </section>
+
+    <section class="slide">
+    <h1>navigation message</h1>
+    </section>
+
+    <section class="slide">
+    <h1>50 bits per second</h1>
+    </section>
+
+    <section class="slide">
+    <h1>complete message: 30 seconds</h1>
+    </section>
+
+    <section class="slide">
+    <h2>fishing for satellites</h2>
+    <ul>
+    <li>locking a satellite requires knowing which spread spectrum code to look for</li>
+    <li>how can you guess which satellites to look for if you don't know where you or the satellites are?</li>
+    <li>try randomly until you get lucky for the first one, but then...</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>almanac</h2>
+    <ul>
+    <li>approximate orbital parameters for all satellites: yay!</li>
+    <li class="slide">...but rotates through 1 or 2 every 30 seconds</li>
+    <li class="slide">12.5 minutes to recieve full almanac ("cold start")</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>better plan: try all satellites at once!</h2>
+    <ul>
+    <li>FFT trick: compute intensive, but computers are fast now</li>
+    <li>find all visible satellites in less than 1/10th of a second</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h1>found the visible satellites; now what?</h1>
+    </section>
+
+    <section class="slide">
+    <h1>need each satellite's precise orbit</h1>
+    </section>
+
+    <section class="slide">
+    <h2>e·phem·er·is /iˈfem(ə)ris/</h2>
+    <p>noun: ephemeris; plural noun: ephemerides</p>
+    <p>a table giving the calculated positions of a celestial object at regular intervals throughout a period.</p>
+    </section>
+
+    <section class="slide">
+    <h2>ephemeris</h2>
+    <ul>
+    <li>detailed orbit, but only for the satellite you're listening to</li>
+    <li>sent every 30 seconds</li>
+    <li>between 18 and 48 seconds to full ephemerides ("warm start")</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>hot start</h2>
+    <p>Given</p>
+    <ul>
+    <li>current ephemerides,</li>
+    <li>accurate UTC time,</li>
+    <li>position within 100km...</li>
+    </ul>
+
+    <p class="slide">Lock and position fix should take less than a second!</p>
+    </section>
+
+    <section class="slide">
+    <h1>but I'm impatient!</h1>
+    </section>
+
+    <section class="slide">
+    <h2>assisted GPS</h2>
+    <ul>
+    <li>gets current ephemerides from a high-speed network, like cell data or wi-fi</li>
+    <li>your phone almost certainly does this</li>
+    <li>your phone might not support GPS at all without network assistance</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>assisted GPS shortcuts</h2>
+    <ul>
+    <li>assisted recievers often have pretty good current time from network</li>
+    <li>phones usually have approximate current location from cell towers</li>
+    <li>together, it's easy to guess which satellites to look for</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h1>but I'm picky!</h1>
+    </section>
+
+    <section class="slide">
+    <h2>satellite ephemerides are a best-guess forecast</h2>
+    <p style="font-size: 150%">once per week, control segment reports what last
+    week's orbits <em>really</em> were</p>
+    </section>
+
+    <section class="slide">
+    <h2>surveying</h2>
+    <ul>
+    <li>surveyors don't need a quick answer, they need a very accurate one</li>
+    <li>record raw data over 24 hours to average out errors</li>
+    <li>a week later, use accurate ephemerides to analyze the recorded measurements</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>other navigation message stuff</h2>
+    <ul>
+    <li>clock corrections
+      <ul>
+      <li>even atomic clocks drift&mdash;and yes, GPS cares</li>
+      <li>like ephemeris, different for each satellite and sent only by that satellite</li>
+      </ul>
+    </li>
+    <li>satellite health</li>
+    <li>ionospheric data</li>
+    <li>UTC corrections</li>
+    </ul>
+    </section>
+
+    <section class="slide">
+    <h2>GPS modernization</h2>
+    <ul>
+    <li>changes all the encoding details</li>
+    <li>but the big picture is the same</li>
+    </ul>
+    </section>
+
     <!-- End slides. -->
 
     <!-- Begin extension snippets. Add or remove as needed. -->
